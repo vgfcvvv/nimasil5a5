@@ -1,0 +1,27 @@
+#!MANAGED-CONFIG https://sub.con8.tk/sub?ver=4&config=https%3A%2F%2Fsubconverter.oss-ap-southeast-1.aliyuncs.com%2FRules%2FRemoteConfig%2Fspecial%2Fbasic.ini&url=vmess%3A%2F%2FeyJhZGQiOiJjdS5jaGVhcHYyLnh5eiIsImFpZCI6IjIiLCJob3N0IjoiY3UuY2hlYXB2Mi54eXoiLCJpZCI6IjY3ZGYyNmU0LTM1ZWItM2EzNi04NmNiLTUyMDM0ZWUxOTlmMyIsIm5ldCI6IndzIiwicGF0aCI6Ii9pbmRleCIsInBvcnQiOiIyNjYxNyIsInBzIjoi5Y%2Bw5rm%2BIiwic2N5IjoiY2hhY2hhMjAtcG9seTEzMDUiLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoiIiwidiI6IjIifQ%3D%3D&target=surge&insert=false interval=86400 strict=false
+
+[General]
+loglevel = notify
+bypass-system = true
+skip-proxy = 127.0.0.1,192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,100.64.0.0/10,localhost,*.local,e.crashlytics.com,captive.apple.com,::ffff:0:0:0:0/1,::ffff:128:0:0:0/1
+#DNS设置或根据自己网络情况进行相应设置
+bypass-tun = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12
+dns-server = 119.29.29.29,223.5.5.5
+
+[Script]
+http-request https?:\/\/.*\.iqiyi\.com\/.*authcookie= script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+
+[Proxy]
+DIRECT = direct
+🇹🇼 台湾 = vmess, cu.cheapv2.xyz, 26617, username=67df26e4-35eb-3a36-86cb-52034ee199f3, tls=false, ws=true, ws-path=/index, sni=cu.cheapv2.xyz, ws-headers=Host:cu.cheapv2.xyz
+
+[Proxy Group]
+Proxies = select,🇹🇼 台湾
+
+[Rule]
+RULE-SET,https://subconverter.oss-ap-southeast-1.aliyuncs.com/Rules/RuleSet/ForceDirect.list,DIRECT
+RULE-SET,https://subconverter.oss-ap-southeast-1.aliyuncs.com/Rules/RuleSet/ForceProxy.list,Proxies
+RULE-SET,https://subconverter.oss-ap-southeast-1.aliyuncs.com/Rules/RuleSet/acl/cn-domains.txt,DIRECT
+RULE-SET,https://subconverter.oss-ap-southeast-1.aliyuncs.com/Rules/RuleSet/acl/gfwlist.txt,Proxies
+GEOIP,CN,DIRECT
+FINAL,Proxies
